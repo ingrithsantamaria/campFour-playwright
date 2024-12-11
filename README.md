@@ -7,7 +7,7 @@ npm install --save-dev @playwright/test faker
 ```
 ## Getting started
 ```bash
-pnpm install
+npm install
 ```
 ## Automation estructure
 - This project follows a modular test structure with the following hierarchy for organizing features and step definitions:
