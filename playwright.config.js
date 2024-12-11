@@ -1,24 +1,32 @@
 import { devices } from '@playwright/test';
 export default {
-  testDir: './e2e/tests',
+  testDir: './playwright/e2e/tests',
   projects: [
     {
-      name: 'Chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'Desktop',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+      },
     },
-    // {
-    //   name: 'Firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-    // {
-    //   name: 'WebKit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'Samsung A54',
+      use: {
+        ...devices['Pixel 5'],
+        viewport: { width: 412, height: 915 },
+      },
+    },
+    {
+      name: 'iPhone 11',
+      use: {
+        ...devices['iPhone 11'],
+      },
+    },
   ],
   retries: 1,
   reporter: [['html', { open: 'on-failure' }]],
   use: {
-    baseURL: 'https://demo.spreecommerce.org/ ',
+    baseURL: 'https://demo.spreecommerce.org',
     screenshot: 'off',
     video: 'off',
     timezoneId: 'America/New_York',

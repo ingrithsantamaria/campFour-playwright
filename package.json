@@ -3,15 +3,8 @@
     "@playwright/test": "^1.49.1",
     "faker": "^5.5.3"
   },
-  "scripts": {
-    "open": "playwright open --e2e --browser electron",
-    "test": "playwright run",
-    "test:samsungA54": "playwright run --env device=samsungA54 --browser chrome --spec 'playwright/e2e/**/*'",
-    "test:iphone11": "playwright run --env device=iphone11 --browser electron --spec 'playwright/e2e/**/*'",
-    "test:desktop": "playwright run --env device=desktop --browser firefox --spec 'playwright/e2e/**/*'",
-    "open:samsungA54": "playwright open --env device=samsungA54 --browser chrome",
-    "open:iphone11": "playwright open --env device=iphone11 --browser electron",
-    "open:desktop": "playwright open --env device=desktop --browser firefox",
-    "test:e2e": "npm-run-all clean-reports --parallel test:samsungA54 test:iphone11 test:desktop"
+  "dependencies": {
+    "@faker-js/faker": "^9.3.0",
+    "playwright": "^1.49.1"
   }
 }
