@@ -3,6 +3,10 @@ import { RegisterUser } from "../../pages/register/registerPage";
 test.describe("User registration", () => {
   test("Create a user with valid data [@smoke]", async ({ page }) => {
     const registerPage = new RegisterUser(page);
-    await registerPage.navigate();
+    await registerPage.navigate()
+    await registerPage.selectUserIcon()
+    await registerPage.selectSignUp()
+    await registerPage.fillForm()
+    await registerPage.signUp()
   });
 });
