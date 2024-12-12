@@ -17,7 +17,7 @@ export class RegisterUser {
     await this.page.click(this.userIcon);
   }
   async selectSignUp() {
-    await this.page.click(this.signUpButton, { waitUntil: "domcontentloaded" });
+    await this.page.click(this.signUpButton, { waitUntil: "domcontentloaded", timeout: 2000 });
   }
   async fillForm() {
     const password = faker.internet.password(10, true);
