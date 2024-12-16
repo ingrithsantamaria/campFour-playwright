@@ -27,7 +27,8 @@ export class RegisterUser {
   }
 
   async selectSignUp() {
-    await this.page.click(this.signUpButton, { waitUntil: "domcontentloaded", timeout: 2000 });
+    await this.page.click(this.signUpButton);
+    await this.page.waitForSelector(this.repeatPassword)
   }
 
   async fillForm() {
