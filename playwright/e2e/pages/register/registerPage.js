@@ -10,12 +10,15 @@ export class RegisterUser {
     this.repeatPassword = "input#user_password_confirmation";
     this.signUpButton = 'div a[href="/user/sign_up"]';
     this.submit = 'input[type="submit"]';
+    this.messageError = 'div#errorExplanation'
   }
 
   async navigate() {
     await this.page.goto("https://demo.spreecommerce.org");
   }
-
+  async isErrorDuplicate() {
+    await this.page.isVisible(this.messageError);
+  }
   async openLogin() {
     const isMobile = this.page.viewportSize().width < 768
     if(isMobile) {
@@ -33,6 +36,14 @@ export class RegisterUser {
 
   async fillForm() {
     const password = faker.internet.password(10, true);
+    const email = faker.internet.email();
+    await this.page.fill(this.emailInput, email);
+    await this.page.fill(this.passwordInput, password);
+    await this.page.fill(this.repeatPassword, password);
+  }
+
+  async fillFormInvalidData() {
+    const password = 'incorrect password'
     const email = faker.internet.email();
     await this.page.fill(this.emailInput, email);
     await this.page.fill(this.passwordInput, password);
