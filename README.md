@@ -9,7 +9,7 @@ npm install --save-dev @playwright/test faker
 ```bash
 npm install
 ```
-## Automation estructure
+## Automation structure
 - This project follows a modular test structure with the following hierarchy for organizing features and step definitions:
 
 ```
@@ -52,3 +52,36 @@ npx playwright test --ui --project='iPhone 11'
 ```
 ## Use of artificial intelligence
 Gemini is used as a guide to identify how to use the same method when the selector on mobile is different from the desktop.
+Configure projects for multiple browsers
+By using projects you can run your tests in multiple browsers such as chromium, webkit and firefox as well as branded browsers such as Google Chrome and Microsoft Edge. Playwright can also run on emulated tablet and mobile devices. See the registry of device parameters for a complete list of selected desktop, tablet and mobile devices.
+```bash
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+
+    /* Test against mobile viewports. */
+    {
+      name: 'Mobile Chrome',
+      use: { ...devices['Pixel 5'] },
+    },
+    {
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 12'] },
+    },
+  ]})
+```
