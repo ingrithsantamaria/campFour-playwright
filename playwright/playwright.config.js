@@ -23,7 +23,6 @@ export default {
     },
   ],
   retries: 1,
-  reporter: [['html', { open: 'on-failure' }]],
   use: {
     baseURL: 'https://demo.spreecommerce.org',
     screenshot: 'off',
