@@ -6,7 +6,7 @@ export class RegisterUser {
   }
 
   async navigate() {
-    await this.page.goto("https://demo.spreecommerce.org");
+    await this.page.goto("/");
   }
 
   async openLogin() {
