@@ -10,7 +10,8 @@ export class RegisterUser {
   }
 
   async openLogin() {
-    const isMobile = this.page.viewportSize().width < 768
+    const userAgent = await this.page.evaluate(() => navigator.userAgent);
+    const isMobile = /Mobi|Android/i.test(userAgent)
     if(isMobile) {
       await this.page.click(selectors.hamburgerMenu)
       await this.page.click(selectors.iconUserMobile)
