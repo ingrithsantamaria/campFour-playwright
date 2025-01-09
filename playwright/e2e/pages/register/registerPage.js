@@ -1,5 +1,6 @@
 import { selectors } from "../../selectors/registerSelectors";
 import { data } from "../../data/data";
+import { expect } from "playwright/test";
 export class RegisterUser {
   constructor(page) {
     this.page = page;
@@ -37,6 +38,12 @@ export class RegisterUser {
     await this.page.fill(selectors.repeatPassword, data.password);
   }
 
+  async fillFormInvalidEmail() {
+    await this.page.fill(selectors.emailInput, 'ingrith.santamaria');
+    await this.page.fill(selectors.passwordInput, data.password);
+    await this.page.fill(selectors.repeatPassword, data.password);
+  }
+
   async signUp() {
     await this.page.click(selectors.submit);
   }
@@ -44,5 +51,9 @@ export class RegisterUser {
   async mailExists() {
     await this.page.waitForSelector(selectors.errorExplanation);
     return await this.page.isVisible(selectors.errorExplanation);
+  }
+
+  async mailInvalid() {
+    expect(this.page.url()).toBe('https://demo.spreecommerce.org/');
   }
 }

@@ -22,4 +22,14 @@ test.describe("User registration", () => {
     await registerPage.signUp();
     await registerPage.mailExists();
   });
+
+  test("Create a user with invalid email", async ({ page }) => {
+    const registerPage = new RegisterUser(page);
+    await registerPage.navigate();
+    await registerPage.openLogin();
+    await registerPage.selectSignUp();
+    await registerPage.fillFormInvalidEmail();
+    await registerPage.signUp();
+    await registerPage.mailInvalid();
+  });
 });
