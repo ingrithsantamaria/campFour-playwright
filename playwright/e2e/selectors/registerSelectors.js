@@ -7,4 +7,5 @@ export const selectors = {
     repeatPassword : "input#user_password_confirmation",
     signUpButton : 'div a[href="/user/sign_up"]',
     submit : 'input[type="submit"]',
+    errorExplanation : 'div#errorExplanation',
 }

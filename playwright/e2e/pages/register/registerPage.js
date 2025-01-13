@@ -1,5 +1,7 @@
-import { faker } from "@faker-js/faker";
 import { selectors } from "../../selectors/registerSelectors";
+import { data, urls } from "../../data/data";
+import { expect } from "playwright/test";
+import { ur } from "@faker-js/faker";
 export class RegisterUser {
   constructor(page) {
     this.page = page;
@@ -26,14 +28,33 @@ export class RegisterUser {
   }
 
   async fillForm() {
-    const password = faker.internet.password(10, true);
-    const email = faker.internet.email();
-    await this.page.fill(selectors.emailInput, email);
-    await this.page.fill(selectors.passwordInput, password);
-    await this.page.fill(selectors.repeatPassword, password);
+    await this.page.fill(selectors.emailInput, data.newEmail);
+    await this.page.fill(selectors.passwordInput,data.password);
+    await this.page.fill(selectors.repeatPassword, data.password);
+  }
+
+  async fillFormWithExistingEmail() {
+    await this.page.fill(selectors.emailInput, data.newEmail);
+    await this.page.fill(selectors.passwordInput, data.password);
+    await this.page.fill(selectors.repeatPassword, data.password);
+  }
+
+  async fillFormInvalidEmail() {
+    await this.page.fill(selectors.emailInput, data.invalidEmail);
+    await this.page.fill(selectors.passwordInput, data.password);
+    await this.page.fill(selectors.repeatPassword, data.password);
   }
 
   async signUp() {
     await this.page.click(selectors.submit);
+  }
+
+  async mailExists() {
+    await this.page.waitForSelector(selectors.errorExplanation);
+    return await this.page.isVisible(selectors.errorExplanation);
+  }
+
+  async mailInvalid() {
+    expect(this.page.url()).toBe(urls.baseUrl);
   }
 }

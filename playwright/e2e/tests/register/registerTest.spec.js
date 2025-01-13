@@ -1,8 +1,8 @@
 import { test } from "@playwright/test";
 import { RegisterUser } from "../../pages/register/registerPage";
 import { Home } from "../../pages/home/home";
-test.describe("User registration",{tag: '@smoke'}, () => {
-  test("Create a user with valid data", async ({ page }) => {
+test.describe("User registration", () => {
+  test("Create a user with valid data", { tag: "@smoke" }, async ({ page }) => {
     const registerPage = new RegisterUser(page);
     const home = new Home(page);
     await registerPage.navigate();
@@ -11,5 +11,25 @@ test.describe("User registration",{tag: '@smoke'}, () => {
     await registerPage.fillForm();
     await registerPage.signUp();
     await home.isOnHomePage();
+  });
+
+  test("Create a user with existing email", async ({ page }) => {
+    const registerPage = new RegisterUser(page);
+    await registerPage.navigate();
+    await registerPage.openLogin();
+    await registerPage.selectSignUp();
+    await registerPage.fillFormWithExistingEmail();
+    await registerPage.signUp();
+    await registerPage.mailExists();
+  });
+
+  test("Create a user with invalid email", async ({ page }) => {
+    const registerPage = new RegisterUser(page);
+    await registerPage.navigate();
+    await registerPage.openLogin();
+    await registerPage.selectSignUp();
+    await registerPage.fillFormInvalidEmail();
+    await registerPage.signUp();
+    await registerPage.mailInvalid();
   });
 });
