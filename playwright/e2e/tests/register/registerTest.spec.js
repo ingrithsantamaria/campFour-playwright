@@ -2,10 +2,13 @@ import { test } from "@playwright/test";
 import { RegisterUser } from "../../pages/register/registerPage";
 import { Home } from "../../pages/home/home";
 test.describe("User registration", () => {
-  test("Create a user with valid data", { tag: "@smoke" }, async ({ page }) => {
-    const registerPage = new RegisterUser(page);
-    const home = new Home(page);
+  let registerPage
+  test.beforeEach(async ({ page }) => {
+    registerPage = new RegisterUser(page);
     await registerPage.navigate();
+  });
+  test("Create a user with valid data", { tag: "@smoke" }, async ({ page }) => {
+    const home = new Home(page);
     await registerPage.openLogin();
     await registerPage.selectSignUp();
     await registerPage.fillForm();
@@ -14,8 +17,6 @@ test.describe("User registration", () => {
   });
 
   test("Create a user with existing email", async ({ page }) => {
-    const registerPage = new RegisterUser(page);
-    await registerPage.navigate();
     await registerPage.openLogin();
     await registerPage.selectSignUp();
     await registerPage.fillFormWithExistingEmail();
@@ -24,8 +25,6 @@ test.describe("User registration", () => {
   });
 
   test("Create a user with invalid email", async ({ page }) => {
-    const registerPage = new RegisterUser(page);
-    await registerPage.navigate();
     await registerPage.openLogin();
     await registerPage.selectSignUp();
     await registerPage.fillFormInvalidEmail();
@@ -34,7 +33,6 @@ test.describe("User registration", () => {
   });
 
   test("Create a user with missing data", async ({ page }) => {
-    const registerPage = new RegisterUser(page);
     await registerPage.navigate();
     await registerPage.openLogin();
     await registerPage.selectSignUp();
