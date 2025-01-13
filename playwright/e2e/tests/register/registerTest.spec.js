@@ -20,7 +20,7 @@ test.describe("User registration", () => {
     await registerPage.selectSignUp();
     await registerPage.fillFormWithExistingEmail();
     await registerPage.signUp();
-    await registerPage.mailExists();
+    await registerPage.messageError();
   });
 
   test("Create a user with invalid email", async ({ page }) => {
@@ -31,5 +31,15 @@ test.describe("User registration", () => {
     await registerPage.fillFormInvalidEmail();
     await registerPage.signUp();
     await registerPage.mailInvalid();
+  });
+
+  test("Create a user with missing data", async ({ page }) => {
+    const registerPage = new RegisterUser(page);
+    await registerPage.navigate();
+    await registerPage.openLogin();
+    await registerPage.selectSignUp();
+    await registerPage.fillFormWithMissingData();
+    await registerPage.signUp();
+    await registerPage.messageError();
   });
 });
