@@ -1,7 +1,6 @@
 import { selectors } from "../../selectors/registerSelectors";
 import { data, urls } from "../../data/data";
 import { expect } from "playwright/test";
-import { ur } from "@faker-js/faker";
 export class RegisterUser {
   constructor(page) {
     this.page = page;
