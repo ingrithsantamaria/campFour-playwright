@@ -27,19 +27,19 @@ export class RegisterUser {
   }
 
   async fillForm() {
-    await this.page.fill(selectors.emailInput, data.email);
+    await this.page.fill(selectors.emailInput, data.newEmail);
     await this.page.fill(selectors.passwordInput,data.password);
     await this.page.fill(selectors.repeatPassword, data.password);
   }
 
   async fillFormWithExistingEmail() {
-    await this.page.fill(selectors.emailInput, 'ingrith.santamaria@applydigital.com');
+    await this.page.fill(selectors.emailInput, data.newEmail);
     await this.page.fill(selectors.passwordInput, data.password);
     await this.page.fill(selectors.repeatPassword, data.password);
   }
 
   async fillFormInvalidEmail() {
-    await this.page.fill(selectors.emailInput, 'ingrith.santamaria');
+    await this.page.fill(selectors.emailInput, data.invalidEmail);
     await this.page.fill(selectors.passwordInput, data.password);
     await this.page.fill(selectors.repeatPassword, data.password);
   }
