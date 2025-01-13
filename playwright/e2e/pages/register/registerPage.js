@@ -1,6 +1,7 @@
 import { selectors } from "../../selectors/registerSelectors";
-import { data } from "../../data/data";
+import { data, urls } from "../../data/data";
 import { expect } from "playwright/test";
+import { ur } from "@faker-js/faker";
 export class RegisterUser {
   constructor(page) {
     this.page = page;
@@ -54,6 +55,6 @@ export class RegisterUser {
   }
 
   async mailInvalid() {
-    expect(this.page.url()).toBe('https://demo.spreecommerce.org/');
+    expect(this.page.url()).toBe(urls.baseUrl);
   }
 }
