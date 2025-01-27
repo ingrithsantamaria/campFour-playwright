@@ -48,6 +48,7 @@ export class RegisterUser {
     await this.page.fill(selectors.passwordInput, data.password);
     await this.page.fill(selectors.repeatPassword, data.password);
   }
+  
   async signUp() {
     await this.page.click(selectors.submit);
   }
