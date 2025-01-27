@@ -8,5 +8,7 @@ export const selectors = {
     signUpButton : 'div a[href="/user/sign_up"]',
     submit : 'input[type="submit"]',
     errorExplanation : 'div#errorExplanation',
-    shopAll : 'div[data-editor-name=“Button”] a'
+    shopAll : 'div[data-editor-name=“Button”] a',
+    wishedProduct : '[data-wished-item-target="add"]',
+    priceContainer : '[data-plp-variant-picker-target="priceContainer]'
 }

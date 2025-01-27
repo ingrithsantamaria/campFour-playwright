@@ -9,4 +9,3 @@ export const data = {
   newPassword: password,
 }
 
-export const urls = { baseUrl: "https://demo.spreecommerce.org/" };
