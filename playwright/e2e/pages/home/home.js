@@ -11,38 +11,36 @@ export class Home {
   }
   async fillLogin() {
     await this.page.fill(selectors.emailInput, data.newEmail);
-    await this.page.fill(selectors.passwordInput, data.newPassword);
+    await this.page.fill(selectors.passwordInput, data.password);
   }
 
   async selectShopAll() {
     await this.page.click(selectors.shopAll);
+    return await this.page.waitForURL("/en/products");
   }
 
-  async selectProducts(options) {
-    const {priceLimit, matchExact, exceedLimit} = options
-    const products = await this.page.$$(selectors.priceContainer)
-    let total = 0
-    let lastAddedIndex = -1
+  async selectProducts(condition) {
+    let totalPrice = 0;
+    const products = await this.page.$$(selectors.productList);
 
-    for (let i = 0; i < products.length; i++) {
-      const priceText = await products[i].innerText()
-      const price = parseFloat(priceText.replace('$', ''))
-      let newTotal = total + price
+    for (const product of products) {
+      const priceText = await product.$eval(
+        selectors.priceContainer,
+        (el) => el.textContent
+      );
+      const price = parseFloat(priceText.replace("$", ""));
+      totalPrice += price;
 
-      if (matchExact && newTotal === priceLimit || !matchExact && newTotal <= priceLimit || exceedLimit && newTotal > priceLimit) {
-        total = newTotal
-        lastAddedIndex = i
-        const favoriteButton = await this.page.$$(`${selectors.wishedProduct}:nth-of-type(${i + 1})`)
-        await favoriteButton[0].click()
+      const meetsCondition =
+        (condition === "less" && totalPrice < 100) ||
+        (condition === "equal" && totalPrice === 100) ||
+        (condition === "greater" && totalPrice > 100);
 
-        if(matchExact || exceedLimit) break
+      if (meetsCondition) {
+        await product.click(selectors.wishedProduct);
+        if (condition === "equal" || condition === "greater") break;
       }
     }
-
-    if (exceedLimit && total <= priceLimit && lastAddedIndex + 1 < products.length) {
-      const nextIndex = lastAddedIndex + 1
-      const favoriteButton = await this.page.$$(`${selectors.wishedProduct}:nth-of-type(${nextIndex + 1})`)
-      await favoriteButton[0].click()
-    }
+    console.log(`Finalizado. Total de precios acumulados: $${totalPrice}`);
   }
 }

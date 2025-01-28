@@ -9,22 +9,23 @@ test.describe('Creating a gift list', () => {
         homePage = new Home(page)
         await registerPage.navigate()
         await registerPage.openLogin()
-        await homePage.fillLogin()
-        await registerPage.signUp()
+        await registerPage.selectSignUp()
+        await registerPage.fillForm();
+        await registerPage.signUp();
         await homePage.selectShopAll()
     })
-    test('Select a product that costs exactly $100', {tag: "@e2e"}, async ({page}) => {
+    test('Select multiple products and the total is less than $100', {tag: "@e2e"}, async ({page}) => {
         homePage = new Home(page)
-        await homePage.selectProducts({priceLimit: 100, matchExact: false})
+        await homePage.selectProducts('less')
     })
 
     test('Select multiple products until the total equals $100', {tag: "@e2e"}, async ({page}) => {
         homePage = new Home(page)
-        await homePage.selectProducts({priceLimit: 100, matchExact: true})
+        await homePage.selectProducts('equal')
     })
     
     test('Select multiple products until the value exceeds $100', {tag: "@e2e"}, async ({page}) => {
         homePage = new Home(page)
-        await homePage.selectProducts({priceLimit: 100, exceedLimit: true})
+        await homePage.selectProducts('greater')
     })
 })
