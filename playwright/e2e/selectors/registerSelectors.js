@@ -8,4 +8,5 @@ export const selectors = {
     signUpButton : 'div a[href="/user/sign_up"]',
     submit : 'input[type="submit"]',
     errorExplanation : 'div#errorExplanation',
+    shopAll : 'div[data-editor-name=“Button”] a'
 }

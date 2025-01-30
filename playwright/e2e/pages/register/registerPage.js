@@ -1,7 +1,6 @@
 import { selectors } from "../../selectors/registerSelectors";
 import { data, urls } from "../../data/data";
 import { expect } from "playwright/test";
-import { ur } from "@faker-js/faker";
 export class RegisterUser {
   constructor(page) {
     this.page = page;
@@ -45,11 +44,16 @@ export class RegisterUser {
     await this.page.fill(selectors.repeatPassword, data.password);
   }
 
+  async fillFormWithMissingData() {
+    await this.page.fill(selectors.passwordInput, data.password);
+    await this.page.fill(selectors.repeatPassword, data.password);
+  }
+  
   async signUp() {
     await this.page.click(selectors.submit);
   }
 
-  async mailExists() {
+  async messageError() {
     await this.page.waitForSelector(selectors.errorExplanation);
     return await this.page.isVisible(selectors.errorExplanation);
   }

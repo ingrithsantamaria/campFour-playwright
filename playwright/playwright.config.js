@@ -19,6 +19,7 @@ export default {
       name: 'iPhone 11',
       use: {
         ...devices['iPhone 11'],
+        viewport: { width: 414, height: 896 },
       },
     },
   ],
