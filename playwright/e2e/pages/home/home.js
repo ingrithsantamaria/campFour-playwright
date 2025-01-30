@@ -1,5 +1,7 @@
+import { expect } from "playwright/test";
 import { data } from "../../data/data";
 import { selectors } from "../../selectors/registerSelectors";
+import { fa } from "@faker-js/faker";
 export class Home {
   constructor(page) {
     this.page = page;
@@ -19,28 +21,29 @@ export class Home {
     return await this.page.waitForURL("/en/products");
   }
 
-  async selectProducts(condition) {
-    let totalPrice = 0;
-    const products = await this.page.$$(selectors.productList);
+  async selectProducts(targetPrice) {  
+    let totalPrice = 0
+    await this.page.waitForSelector(selectors.productCard)
+    const productsCards = await this.page.$$(selectors.productCard)
 
-    for (const product of products) {
-      const priceText = await product.$eval(
-        selectors.priceContainer,
-        (el) => el.textContent
-      );
-      const price = parseFloat(priceText.replace("$", ""));
-      totalPrice += price;
+    for(const productCard of productsCards) {
+      const productName = await productCard.$(selectors.productName)
+      const productNameText = await productName.innerText()
 
-      const meetsCondition =
-        (condition === "less" && totalPrice < 100) ||
-        (condition === "equal" && totalPrice === 100) ||
-        (condition === "greater" && totalPrice > 100);
+      const productPriceElement = await productCard.$(selectors.priceContainer)
+      const productPriceText = await productPriceElement.innerText()
+      const productPrice = parseFloat(productPriceText.replace("$", ""))
 
-      if (meetsCondition) {
-        await product.click(selectors.wishedProduct);
-        if (condition === "equal" || condition === "greater") break;
+      console.log(`Producto: ${productNameText} - Precio: $${productPrice}`)
+
+      if(totalPrice + productPrice <= targetPrice) {
+        totalPrice += productPrice
+        await this.page.click(selectors.wishedProduct)
+        
+        console.log(`Agregado a favoritos: ${productNameText}`)
+      }else {
+        console.log(`No se agregó a favoritos: ${productNameText}, Precio total: ${totalPrice}`)
       }
     }
-    console.log(`Finalizado. Total de precios acumulados: $${totalPrice}`);
   }
 }

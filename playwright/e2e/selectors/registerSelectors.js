@@ -10,6 +10,13 @@ export const selectors = {
     errorExplanation : 'div#errorExplanation',
     shopAll : 'a[href="/en/products"]',
     wishedProduct : 'button[data-action="wished-item#add"]',
+    whisedIcon : 'a#wishlist-icon',
     priceContainer : 'div[data-plp-variant-picker-target="priceContainer"] p',
-    productList : 'div#products'
+    productList : 'div#products',
+    productCard : 'div.product-card-inner',
+    productName : 'h3.product-card-title',
+    favoriteList : 'div#wishlist',
+    favoritesListItem : 'div.w-full div',
+    favoriteListProductName : 'a[href]',
+    favoriteListProductPrice : 'div.w-full div.mt-1 p',
 }

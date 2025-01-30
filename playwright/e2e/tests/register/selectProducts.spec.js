@@ -16,16 +16,16 @@ test.describe('Creating a gift list', () => {
     })
     test('Select multiple products and the total is less than $100', {tag: "@e2e"}, async ({page}) => {
         homePage = new Home(page)
-        await homePage.selectProducts('less')
+        await homePage.selectProducts(99)
     })
 
     test('Select multiple products until the total equals $100', {tag: "@e2e"}, async ({page}) => {
         homePage = new Home(page)
-        await homePage.selectProducts('equal')
+        await homePage.selectProducts(100)
     })
     
     test('Select multiple products until the value exceeds $100', {tag: "@e2e"}, async ({page}) => {
         homePage = new Home(page)
-        await homePage.selectProducts('greater')
+        await homePage.selectProducts(101)
     })
 })
