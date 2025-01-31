@@ -1,7 +1,5 @@
-import { expect } from "playwright/test";
 import { data } from "../../data/data";
 import { selectors } from "../../selectors/registerSelectors";
-import { fa } from "@faker-js/faker";
 export class Home {
   constructor(page) {
     this.page = page;
