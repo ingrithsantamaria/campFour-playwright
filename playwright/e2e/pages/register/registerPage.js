@@ -1,5 +1,6 @@
 import { selectors } from "../../selectors/registerSelectors";
-import { data, urls } from "../../data/data";
+import { data } from "../../data/data";
+import { urls } from "../../data/urls";
 import { expect } from "playwright/test";
 export class RegisterUser {
   constructor(page) {
@@ -28,25 +29,25 @@ export class RegisterUser {
 
   async fillForm() {
     await this.page.fill(selectors.emailInput, data.newEmail);
-    await this.page.fill(selectors.passwordInput,data.password);
-    await this.page.fill(selectors.repeatPassword, data.password);
+    await this.page.fill(selectors.passwordInput,data.newPassword);
+    await this.page.fill(selectors.repeatPassword, data.newPassword);;
   }
 
   async fillFormWithExistingEmail() {
     await this.page.fill(selectors.emailInput, data.newEmail);
-    await this.page.fill(selectors.passwordInput, data.password);
-    await this.page.fill(selectors.repeatPassword, data.password);
+    await this.page.fill(selectors.passwordInput, data.newPassword);
+    await this.page.fill(selectors.repeatPassword, data.newPassword);;
   }
 
   async fillFormInvalidEmail() {
     await this.page.fill(selectors.emailInput, data.invalidEmail);
-    await this.page.fill(selectors.passwordInput, data.password);
-    await this.page.fill(selectors.repeatPassword, data.password);
+    await this.page.fill(selectors.passwordInput, data.newPassword);
+    await this.page.fill(selectors.repeatPassword, data.newPassword);;
   }
 
   async fillFormWithMissingData() {
-    await this.page.fill(selectors.passwordInput, data.password);
-    await this.page.fill(selectors.repeatPassword, data.password);
+    await this.page.fill(selectors.passwordInput, data.newPassword);
+    await this.page.fill(selectors.repeatPassword, data.newPassword);;
   }
   
   async signUp() {
