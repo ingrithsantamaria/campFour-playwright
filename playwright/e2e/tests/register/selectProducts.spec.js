@@ -8,10 +8,10 @@ test.describe('Creating a gift list', () => {
         registerPage = new RegisterUser(page)
         homePage = new Home(page)
         await registerPage.navigate()
-        await registerPage.openLogin()
-        await registerPage.selectSignUp()
-        await registerPage.fillForm();
-        await registerPage.signUp();
+        // await registerPage.openLogin()
+        // await registerPage.selectSignUp()
+        // await registerPage.fillForm();
+        // await registerPage.signUp();
         await homePage.selectShopAll()
     })
     test('Select multiple products and the total is less than $100', {tag: "@e2e"}, async ({page}) => {

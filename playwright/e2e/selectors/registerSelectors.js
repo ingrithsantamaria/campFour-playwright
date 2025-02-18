@@ -16,7 +16,10 @@ export const selectors = {
     productCard : 'div.product-card-inner',
     productName : 'h3.product-card-title',
     favoriteList : 'div#wishlist',
+    favoriteListIcon : 'a[href="/account/wishlist"]',
     favoritesListItem : 'div.w-full div',
     favoriteListProductName : 'a[href]',
     favoriteListProductPrice : 'div.w-full div.mt-1 p',
+    addShoppingCart : 'button[name="button"]',
+    checkoutButton : 'a[data-cart-target="checkoutButton"]',
 }

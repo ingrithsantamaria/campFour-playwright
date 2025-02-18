@@ -5,10 +5,17 @@ export class Home {
     this.page = page;
     this.bandSuccessful = "div.p-2";
   }
+
   async isOnHomePage() {
     await this.page.waitForSelector(this.bandSuccessful);
     return await this.page.isVisible(this.bandSuccessful);
   }
+  
+  async selectFavoriteIcon() {  
+    await this.page.click(selectors.favoriteListIcon);
+    return await this.page.waitForURL("/account/wishlist")
+  }
+
   async fillLogin() {
     await this.page.fill(selectors.emailInput, data.newEmail);
     await this.page.fill(selectors.passwordInput, data.password);
