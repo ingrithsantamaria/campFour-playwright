@@ -1,7 +1,6 @@
 import { test } from "@playwright/test";
 import { Home } from "../../pages/home/home";
 import { ShoppingCart } from "../../pages/cart/shoppingCart";
-import { Whitelist } from "../../pages/whitelist/whitelist";
 test.describe("Add products to cart", () => {
   let registerPage;
   let homePage;
