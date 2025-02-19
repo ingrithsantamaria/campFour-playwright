@@ -1,5 +1,4 @@
 import { test } from "@playwright/test";
-import { RegisterUser } from "../../pages/register/registerPage";
 import { Home } from "../../pages/home/home";
 import { ShoppingCart } from "../../pages/cart/shoppingCart";
 import { Whitelist } from "../../pages/whitelist/whitelist";
@@ -12,10 +11,6 @@ test.describe("Add products to cart", () => {
     registerPage = new RegisterUser(page);
     homePage = new Home(page);
     await registerPage.navigate();
-    // await registerPage.openLogin();
-    // await registerPage.selectSignUp();
-    // await registerPage.fillForm();
-    // await registerPage.signUp();
     await homePage.selectShopAll();
   });
   
@@ -24,8 +19,6 @@ test.describe("Add products to cart", () => {
     shoppingCart = new ShoppingCart(page);
     whitelist = new Whitelist(page);
     await homePage.selectProducts(99);
-    //await homePage.selectFavoriteIcon();
-    //await whitelist.isOnWhitelistPage()
     await shoppingCart.selectAddToCart()
     await shoppingCart.selectCheckout();
   });
