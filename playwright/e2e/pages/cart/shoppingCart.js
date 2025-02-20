@@ -1,5 +1,11 @@
-import { selectors } from "../../selectors/registerSelectors";
+import { selectors } from "../../selectors/selectors";
 export class ShoppingCart {
+    constructor(page) {
+        this.page = page;
+    }
+    async navigate() {
+        await this.page.goto("/");
+    }
     async selectAddToCart() {     
         const addToCart = await this.page.click(selectors.addToCart);
         for (let i = 0; i < addToCart.length; i++) {
