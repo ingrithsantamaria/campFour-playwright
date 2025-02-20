@@ -5,5 +5,8 @@ export const selectors = {
     productCard : 'div.product-card-inner',
     productName : 'h3.product-card-title',
     addShoppingCart : 'button[name="button"]',
+    cartItems : '#line-items',
+    cardSideBar : '#slideover-cart',
+    closeCartButton : 'button[data-action="slideover#toggle"]',
     checkoutButton : 'a[data-cart-target="checkoutButton"]',
 }
