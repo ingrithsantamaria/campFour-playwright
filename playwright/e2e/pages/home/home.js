@@ -1,7 +1,8 @@
-import { selectors } from "../../selectors/selectors";
 export class Home {
   constructor(page) {
     this.page = page;
+    this.shopAll = page.locator('a[href="/en/products"]');
+    
   }
 
   async navigate() {
@@ -9,7 +10,7 @@ export class Home {
   }
 
   async selectShopAll() {
-    await this.page.click(selectors.shopAll);
+    await this.shopAll.first().click()
     return await this.page.waitForURL("/en/products");
   }
 }

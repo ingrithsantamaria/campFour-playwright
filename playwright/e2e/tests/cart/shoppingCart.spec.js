@@ -4,13 +4,14 @@ import { ShoppingCart } from "../../pages/cart/shoppingCart";
 import { Catalog } from "../../pages/catalog/catalog";
 import { ProductDetail } from "../../pages/productDetail/productDetail";
 
+
 test('Add products to cart', {tag: '@e2e'}, async ({ page }) => {
     const homePage = new Home(page);
     const catalog = new Catalog(page);
     const productDetail = new ProductDetail(page);
     const shoppingCart = new ShoppingCart(page);
 
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < 3; i++) {
         await homePage.navigate()
         await homePage.selectShopAll();
 
@@ -26,6 +27,6 @@ test('Add products to cart', {tag: '@e2e'}, async ({ page }) => {
     }
 
     const cartItems = await shoppingCart.getCratItems();
-    expect(cartItems).toBe(n);
+    expect(cartItems).toBe(3);
 })
 
