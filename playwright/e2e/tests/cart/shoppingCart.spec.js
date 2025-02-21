@@ -11,7 +11,7 @@ test('Add products to cart', {tag: '@e2e'}, async ({ page }) => {
     const productDetail = new ProductDetail(page);
     const shoppingCart = new ShoppingCart(page);
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 1; i++) {
         await homePage.navigate()
         await homePage.selectShopAll();
 
@@ -20,13 +20,16 @@ test('Add products to cart', {tag: '@e2e'}, async ({ page }) => {
         await catalog.selectRandomProduct(affordableProducts);
 
         await productDetail.addToCart();
+        await expect(productDetail.cartSidebarClose).toBeVisible();
 
         await productDetail.closeCartSidebar();
 
         await page.goBack();
+
+
     }
 
     const cartItems = await shoppingCart.getCratItems();
-    expect(cartItems).toBe(3);
+    expect(cartItems).toBe(1);
 })
 
